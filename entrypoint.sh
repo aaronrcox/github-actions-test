@@ -4,7 +4,7 @@ cd /app
 
 # delete the files in the build folder
 # this is for when we run locially, on a fresh clone, build folder will not exist
-rm-rf /app/build/*
+rm -rf /app/build/*
 
 # re-create the build folder (does nothing if already exists)
 mkdir build
@@ -16,6 +16,3 @@ emcmake cmake ..
 
 # run make - this will compile our project
 make
-
-cd /app/bin
-find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
