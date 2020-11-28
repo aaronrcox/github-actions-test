@@ -1,8 +1,8 @@
 version: '2.0'
 services:
-  web:
+  emscripten_build:
     build: .
-    command: /bin/sh -c "/app/entrypoint.sh"
+    command: bash "/app/entrypoint.sh"
     volumes:
     - .:/app
 
