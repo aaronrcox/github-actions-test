@@ -2,7 +2,7 @@ version: '2.0'
 services:
   emscripten_build:
     build: .
-    command: /bin/bash -c "chmod +x /app/entrypoint.sh; /app/entrypoint.sh"
+    command: /bin/sh -c "chmod +x /app/entrypoint.sh; /app/entrypoint.sh"
     volumes:
     - .:/app
 
