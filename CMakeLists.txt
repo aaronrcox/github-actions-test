@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("EmscriptenProjects")
 
+
 # LOCATE SDL2 LIBRARY
 # =============================================================================
 set(SDL2_DIR "${CMAKE_HOME_DIRECTORY}/libs/vc/SDL2-2.0.12")
