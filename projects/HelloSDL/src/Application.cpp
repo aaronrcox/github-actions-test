@@ -30,7 +30,7 @@ void Application::Run()
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	// load assets
-	auto img = SDL_LoadBMP("./HelloSDLAssets/arc-codes.bmp");
+	auto img = SDL_LoadBMP("./assets/arc-codes.bmp");
 	m_image = SDL_CreateTextureFromSurface(m_renderer, img);
 	SDL_FreeSurface(img);
 
