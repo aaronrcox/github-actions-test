@@ -4,7 +4,13 @@ cmake_minimum_required (VERSION 3.8)
 project("HelloOpenGL")
 
 # Add source to this project's executable.
-add_executable ("${PROJECT_NAME}" "src/main.cpp"   "inc/Application.h" "src/Application.cpp")
+add_executable ("${PROJECT_NAME}" 
+    "src/main.cpp"   
+    "inc/Application.h" 
+    "src/Application.cpp" 
+    "inc/HelloOpenGLApp.h" 
+    "src/HelloOpenGLApp.cpp"
+)
 
 include_directories("inc;")
 
@@ -12,7 +18,7 @@ include_directories("inc;")
 # =============================================================================
 if (EMSCRIPTEN)
     
-    set(USE_FLAGS "-s USE_SDL=2 --preload-file ${CMAKE_HOME_DIRECTORY}/projects/${PROJECT_NAME}/assets/@/assets/")
+    set(USE_FLAGS "-s FULL_ES2=1 -s USE_SDL=2 --preload-file ${CMAKE_HOME_DIRECTORY}/projects/${PROJECT_NAME}/assets/@/assets/")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_FLAGS}")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS}")
@@ -32,8 +38,18 @@ if (EMSCRIPTEN)
     # SDL2 library suppoerted via USE_SDL=2 from emscripten ports.
     # 
 elseif(MSVC)
+
+    add_compile_definitions(GLEW_STATIC)
+
     include_directories("${SDL2_INCLUDE_DIR};")
+    include_directories("${GLEW_INCLUDE_DIR};")
+
     target_link_libraries(${PROJECT_NAME} "${SDL2_LIBRARIES}")
+    target_link_libraries(${PROJECT_NAME} "${GLEW_LIBRARIES}")
+    target_link_libraries(${PROJECT_NAME} "OpenGL32.lib")
+
+    message("GLEW LIBS: ${GLEW_LIBRARIES}")
+
 endif()
 # =============================================================================
 

@@ -11,14 +11,15 @@ class Application
 public:
 
 	Application();
-	~Application();
+	virtual ~Application();
 
 	void Run();
 
 	void GameLoop();
-
-	void Update();
-	void Render();
+	virtual void Load();
+	virtual void Unload();
+	virtual void Update();
+	virtual void Render();
 
 protected:
 private:

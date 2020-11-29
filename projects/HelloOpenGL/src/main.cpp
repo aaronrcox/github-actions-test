@@ -1,13 +1,13 @@
 
 #include <iostream>
-#include "Application.h"
+#include "HelloOpenGLApp.h"
 
 
 
 int main(int argc, char** argv)
 {
 	{
-		Application app;
+		HelloOpenGLApp app;
 		app.Run();
 	}
 

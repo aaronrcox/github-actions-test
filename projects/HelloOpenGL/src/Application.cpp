@@ -1,5 +1,4 @@
 #include "Application.h"
-#include <SDL.h>
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
@@ -12,6 +11,11 @@ struct EmscriptenGameLoopFunc
 Application* EmscriptenGameLoopFunc::app = nullptr;
 
 #endif
+
+#include <GL/glew.h>
+#include <SDL.h>
+#include <SDL_opengl.h>
+
 
 Application::Application()
 {
@@ -26,13 +30,27 @@ Application::~Application()
 void Application::Run()
 {
 	SDL_Init(SDL_INIT_VIDEO);
-	m_window = SDL_CreateWindow(m_windowTitle, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight, 0);
-	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-	// load assets
-	auto img = SDL_LoadBMP("./assets/arc-codes.bmp");
-	m_image = SDL_CreateTextureFromSurface(m_renderer, img);
-	SDL_FreeSurface(img);
+	m_window = SDL_CreateWindow(m_windowTitle, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
+		m_windowWidth, m_windowHeight, SDL_WINDOW_OPENGL);
+
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetSwapInterval(0);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+	SDL_GLContext glContext = SDL_GL_CreateContext(m_window);
+
+	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			
+	// Initialise glew
+	glewExperimental = GL_TRUE;
+	GLenum glewInitResult = glewInit();
+
+	
+	// Now that our window and opengl context is created
+	Load();
 
 	#ifdef __EMSCRIPTEN__
 		// The browser requires the main loop to be executed in a callback
@@ -46,8 +64,10 @@ void Application::Run()
 			GameLoop();
 	#endif
 
+	Unload();
+
 	// clearnup
-	SDL_DestroyTexture(m_image);
+	SDL_GL_DeleteContext(glContext);
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
 	SDL_Quit();
@@ -66,6 +86,19 @@ void Application::GameLoop()
 
 	Update();
 	Render();
+
+	// end of frame, swap the opengl back bufer
+	SDL_GL_SwapWindow(m_window);
+}
+
+void Application::Load()
+{
+
+}
+
+void Application::Unload()
+{
+
 }
 
 void Application::Update()
@@ -75,11 +108,5 @@ void Application::Update()
 
 void Application::Render()
 {
-	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-	SDL_RenderClear(m_renderer);
 
-	SDL_Rect rect = { 10, 10, 256, 256 };
-	SDL_RenderCopy(m_renderer, m_image, NULL, &rect);
-
-	SDL_RenderPresent(m_renderer);
 }
