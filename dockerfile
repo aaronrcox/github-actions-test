@@ -3,4 +3,4 @@
 
  RUN apt update && apt install -y ninja-build
 
- ENTRYPOINT /app/entrypoint.sh
+ CMD ["/bin/sh", "/app/entrypoint.sh"]
