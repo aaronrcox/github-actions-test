@@ -2,3 +2,5 @@
  FROM emscripten/emsdk:latest
 
  RUN apt update && apt install -y ninja-build
+
+ ENTRYPOINT /app/entrypoint.sh

@@ -1,10 +1,10 @@
 
 cmake_minimum_required (VERSION 3.8)
 
-project("HelloSDL")
+project("HelloOpenGL")
 
 # Add source to this project's executable.
-add_executable (${PROJECT_NAME} "src/main.cpp"   "inc/Application.h" "src/Application.cpp")
+add_executable ("${PROJECT_NAME}" "src/main.cpp"   "inc/Application.h" "src/Application.cpp")
 
 include_directories("inc;")
 
@@ -29,7 +29,6 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 # Reference 3rd Party Libraries
 # =============================================================================
 if (EMSCRIPTEN)
-    # 
     # SDL2 library suppoerted via USE_SDL=2 from emscripten ports.
     # 
 elseif(MSVC)
@@ -41,9 +40,7 @@ endif()
 # BUILD STEPS - Copy assets
 # =============================================================================
 if (EMSCRIPTEN)
-    #
-    # no custom copy actions needed    
-    # 
+    
 elseif(MSVC)
     # copy SDL2.dll to output directory
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD   
@@ -53,5 +50,5 @@ elseif(MSVC)
     # copy asset directory to output folder
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD   
         COMMAND ${CMAKE_COMMAND} -E copy_directory 
-        "${CMAKE_HOME_DIRECTORY}/projects/HelloSDL/assets" "${EXECUTABLE_OUTPUT_PATH}/assets")
+        "${CMAKE_HOME_DIRECTORY}/projects/${PROJECT_NAME}/assets" "${EXECUTABLE_OUTPUT_PATH}/assets")
 endif()

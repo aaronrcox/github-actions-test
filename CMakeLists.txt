@@ -5,6 +5,9 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("EmscriptenProjects")
 
+if(EMSCRIPTEN)
+	set(CMAKE_BUILD_TYPE "Emscripten")
+endif()
 
 # LOCATE SDL2 LIBRARY
 # =============================================================================
@@ -19,6 +22,9 @@ set(SDL2_LIBRARIES "${SDL2_LIBRARY_DIR}/SDL2.lib;${SDL2_LIBRARY_DIR}/SDL2main.li
 # =============================================================================
 add_subdirectory ("projects/HelloWorld")
 add_subdirectory ("projects/HelloSDL")
+add_subdirectory ("projects/HelloOpenGL")
 # =============================================================================
+
+
 
 
