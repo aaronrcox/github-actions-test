@@ -34,7 +34,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
       } else {
         throw 'using preloaded data can only be done on a web page or in a web worker';
       }
-      var PACKAGE_NAME = '../../../bin/Emscripten/HelloSDL.data';
+      var PACKAGE_NAME = '../../../bin/Emscripten/HelloSDL/HelloSDL.data';
       var REMOTE_PACKAGE_BASE = 'HelloSDL.data';
       if (typeof Module['locateFilePackage'] === 'function' && !Module['locateFile']) {
         Module['locateFile'] = Module['locateFilePackage'];
@@ -114,7 +114,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
       function assert(check, msg) {
         if (!check) throw msg + new Error().stack;
       }
-  Module['FS_createPath']('/', 'HelloSDLAssets', true, true);
+  Module['FS_createPath']('/', 'assets', true, true);
 
       /** @constructor */
       function DataRequest(start, end, audio) {
@@ -163,10 +163,10 @@ var Module = typeof Module !== 'undefined' ? Module : {};
             for (var i = 0; i < files.length; ++i) {
               DataRequest.prototype.requests[files[i].filename].onload();
             }
-                Module['removeRunDependency']('datafile_../../../bin/Emscripten/HelloSDL.data');
+                Module['removeRunDependency']('datafile_../../../bin/Emscripten/HelloSDL/HelloSDL.data');
 
       };
-      Module['addRunDependency']('datafile_../../../bin/Emscripten/HelloSDL.data');
+      Module['addRunDependency']('datafile_../../../bin/Emscripten/HelloSDL/HelloSDL.data');
     
       if (!Module.preloadResults) Module.preloadResults = {};
     
@@ -187,7 +187,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
     }
   
    }
-   loadPackage({"files": [{"filename": "/HelloSDLAssets/arc-codes.bmp", "start": 0, "end": 196664, "audio": 0}], "remote_package_size": 196664, "package_uuid": "d214728e-aa34-46e0-b37d-451458c1c5a8"});
+   loadPackage({"files": [{"filename": "/assets/arc-codes.bmp", "start": 0, "end": 196664, "audio": 0}], "remote_package_size": 196664, "package_uuid": "badce9d9-f933-4cc6-83f4-91e5c6d5a730"});
   
   })();
   
