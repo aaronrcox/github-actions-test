@@ -50,10 +50,10 @@ endif()
 
 # Include sub-projects.
 # =============================================================================
-# add_subdirectory ("projects/HelloWorld")
-# add_subdirectory ("projects/HelloSDL")
+add_subdirectory ("projects/HelloWorld")
+add_subdirectory ("projects/HelloSDL")
 add_subdirectory ("projects/HelloRaylib")
-# add_subdirectory ("projects/HelloOpenGL")
+add_subdirectory ("projects/HelloOpenGL")
 # =============================================================================
 
 

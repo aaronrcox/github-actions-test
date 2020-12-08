@@ -63,7 +63,7 @@ void Application::Render()
 
 	ClearBackground(RAYWHITE);
 
-	DrawRectangle(10, 10, 100, 100, BLUE);
+	DrawRectangle(10, 10, 100, 100, RED);
 
 	DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
 
