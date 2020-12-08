@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # make sure we are in the project directory
 cd /app
@@ -15,4 +16,7 @@ cd ./build
 emcmake cmake ..
 
 # run make - this will compile our project
-make
+emmake make
+
+
+echo "RUN MAKE HELLO WORLD"

@@ -22,15 +22,18 @@ endif()
 # LOCATE RAYLIB LIBRARY
 # =============================================================================
 if(MSVC)
-	set(RAYLIB_DIR "${CMAKE_HOME_DIRECTORY}/libs/vc/RAYLIB-3.0")
+	set(RAYLIB_DIR "${CMAKE_HOME_DIRECTORY}/libs/vc/Raylib-3.0")
 	set(RAYLIB_INCLUDE_DIR "${RAYLIB_DIR}/include")
 	set(RAYLIB_LIBRARY_DIR "${RAYLIB_DIR}/bin/x64/${CMAKE_BUILD_TYPE}/")
 	set(RAYLIB_LIBRARIES "winmm.lib;${RAYLIB_LIBRARY_DIR}/raylib.lib;")
 elseif(EMSCRIPTEN)
-	set(RAYLIB_DIR "${CMAKE_HOME_DIRECTORY}/libs/em/RAYLIB-3.0")
+
+	set(RAYLIB_DIR "${CMAKE_HOME_DIRECTORY}/libs/em/Raylib-3.0")
 	set(RAYLIB_INCLUDE_DIR "${RAYLIB_DIR}/include")
 	set(RAYLIB_LIBRARY_DIR "${RAYLIB_DIR}/libs")
-	set(RAYLIB_LIBRARIES "${RAYLIB_LIBRARY_DIR}/librarylib.bc;")
+	set(RAYLIB_LIBRARIES "${RAYLIB_LIBRARY_DIR}/libraylib.a;")
+
+
 endif()
 # =============================================================================
 
@@ -47,10 +50,10 @@ endif()
 
 # Include sub-projects.
 # =============================================================================
-add_subdirectory ("projects/HelloWorld")
-add_subdirectory ("projects/HelloSDL")
+# add_subdirectory ("projects/HelloWorld")
+# add_subdirectory ("projects/HelloSDL")
 add_subdirectory ("projects/HelloRaylib")
-add_subdirectory ("projects/HelloOpenGL")
+# add_subdirectory ("projects/HelloOpenGL")
 # =============================================================================
 
 
